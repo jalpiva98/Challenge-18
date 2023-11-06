@@ -55,7 +55,7 @@ Get thought by ID: `GET /api/thoughts/:thoughtId'
 Update a thought: `PUT /api/thoughts/:thoughtId'
 Delete a thought: `DELETE /api/thoughts/:thoughtId'
 ```
-````md
+```md
 REACTIONS
 
 Add a reaction: PUT /api/thoughts/:id/reactions
