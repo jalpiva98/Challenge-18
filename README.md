@@ -61,6 +61,7 @@ REACTIONS
 Add a reaction: PUT /api/thoughts/:id/reactions
 Delete a reaction: DELETE /api/thoughts/:id/reactions 
 ```
+
 ## Preview
 ![image](https://github.com/jalpiva98/Challenge-18/assets/108430639/031609f7-e307-4a9d-b61c-cfa89a31eee7)
 ![image](https://github.com/jalpiva98/Challenge-18/assets/108430639/2fffd6c0-8e0b-46a3-aecf-6c2394f65e98)
