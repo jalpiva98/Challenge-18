@@ -29,6 +29,6 @@ router
   .post(addFriend)
   .delete(removeFriend);
 
-// we can add more routes as we see fit
+
 
 module.exports = router;

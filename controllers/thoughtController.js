@@ -89,10 +89,25 @@ const thoughtController = {
 
     // we remove a reaction
     removeReaction({ params }, res) {
-        Thought.findByIdAndUpdate(params.thoughtId, { $pull: { reactions: { reactionId: params.reactionId } } }, { new: true })
-        .then(dbThoughtData => res.json(dbThoughtData))
-        .catch(err => res.json(err));
-    }
-};
+        console.log('thoughtId:', params.thoughtId);
+        console.log('reactionId:', params.reactionId);
+      
+        Thought.findByIdAndUpdate(
+          params.thoughtId,
+          { $pull: { reactions: { reactionId: params.reactionId } } },
+          { new: true }
+        )
+          .then((dbThoughtData) => {
+            if (!dbThoughtData) {
+              return res.status(404).json({ message: 'Thought not found' });
+            }
+            res.status(204).end(); // Return a 204 No Content status
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).json(err);
+          });
+      }
+}
 
 module.exports = thoughtController;
