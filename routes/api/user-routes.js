@@ -1,22 +1,34 @@
 const router = require('express').Router();
+
+// we import methods 
 const {
-    getAllUsers,
-    getSingleUser,
-    createUser,
-    updateUser,
-    deleteUser,
-    addFriend,
-    removeFriend
-} = require('../../controllers/user-controller');
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+  addFriend,
+  removeFriend
+  //  we can add any other controller methods 
+} = require('../../controllers/userController');
 
-// /api/users we consolidate all the requests to a single endpoint in this line
-router.route('/').get(getAllUsers).post(createUser);
+// we have to set up root route to get all users and create a new one
+router.route('/')
+  .get(getAllUsers)      // retrieve all users from the database
+  .post(createUser);    // create a new user and add them to the database
 
-// /api/users/:userId we consolidate all the requests to a single endpoint in this line
-router.route('/:userId').get(getSingleUser).delete(deleteUser).put(updateUser);
+// then we set up dynamic routes with IDs for specific operations on individual users
+router.route('/:id')
+  .get(getUserById)     // we retrieve a specific user by their id from the database
+  .put(updateUser)      // or update a specific user details by their id
+  .delete(deleteUser);  // or delete a specific user by their id
 
-// /api/users/:userId/friends/:friendId we consolidate all the requests to a single endpoint in this line
-router.route("/:userId/friends/:friendId").post(addFriend).delete(removeFriend);
+// add a friend and remove a friend
+router
+  .route('/:userId/friends/:friendId')
+  .post(addFriend)
+  .delete(removeFriend);
 
+// we can add more routes as we see fit
 
 module.exports = router;

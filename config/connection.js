@@ -7,5 +7,4 @@ mongoose.connect('mongodb://127.0.0.1:27017/Architoughts', {
 
 module.exports = mongoose.connection;
 
-const mongoose = require('mongoose');
 

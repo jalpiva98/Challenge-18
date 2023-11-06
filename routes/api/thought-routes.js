@@ -1,27 +1,37 @@
 const router = require('express').Router();
+
+// we import methods
 const {
-    getAllThoughts,
-    getSingleThought,
-    createThought,
-    updateThought,
-    deleteThought,
-    addReaction,
-    removeReaction
-} = require('../../controllers/thought-controller');
+  getAllThoughts,
+  getThoughtById,
+  createThought,
+  updateThought,
+  deleteThought,
+  addReaction,
+  removeReaction
+  // we can add more methods
+} = require('../../controllers/thoughtController');
 
-// /api/thoughts we consolidate all the requests to a single endpoint in this line
-router.route('/').get(getAllThoughts).post(createThought);
+// we set up shop for the thought creation and getting
+router.route('/')
+  .get(getAllThoughts)      // we retrieve all thoughts from the database
+  .post(createThought);     // we create a new thought and add it to the database
 
-// /api/thoughts/:thoughtid we consolidate all the requests to a single endpoint in this line
-router.route('/:thoughtId').get(getSingleThought).delete(deleteThought).put(updateThought);
+// then we set up dynamic routes with IDs for ops and thoughts 
+router.route('/:id')
+  .get(getThoughtById)      // we retrieve a specific thought by its id from the database
+  .put(updateThought)       // we update a specific thought's details by its id
+  .delete(deleteThought);   // we delete a specific thought by its id
 
-// /api/thoughts/:thoughtId/reactions we consolidate all the requests to a single endpoint in this line
-router.route("/:thoughtId/reactions").post(addReaction);
+// add a reaction and remove a reaction
+router
+  .route('/:thoughtId/reactions')
+  .post(addReaction);
 
-// /api/thoughts/:thoughtId/reactions/:reactionId we consolidate all the requests to a single endpoint in this line
-router.route("/:thoughtId/reactions/:reactionId").delete(removeReaction);
+router
+  .route('/:thoughtId/reactions/:reactionId')
+  .delete(removeReaction);
 
-
-
+// we can add more routes if we want to
 
 module.exports = router;
